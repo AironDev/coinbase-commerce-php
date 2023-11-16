@@ -141,32 +141,38 @@ class ApiResource extends \ArrayObject
         return $this->__get($key);
     }
 
-    public function offsetSet($key, $value)
+    public function offsetSet($key, $value) :void
     {
         null === $key ? array_push($this->attributes, $value) : $this->attributes[$key] = $value;
     }
 
-    public function count()
+    public function count() :int
     {
         return count($this->attributes);
     }
 
-    public function asort()
+    // public function asort()
+    // {
+    //     asort($this->attributes);
+    // }
+
+    public function asort($flags = SORT_REGULAR) : bool
     {
-        asort($this->attributes);
+        asort($this->items);
     }
 
-    public function ksort()
+
+    public function ksort($flags = SORT_REGULAR ):bool
     {
         ksort($this->attributes);
     }
 
-    public function offsetUnset($key)
+    public function offsetUnset($key) : void
     {
         unset($this->attributes[$key]);
     }
 
-    public function getIterator()
+    public function getIterator(): \Iterator
     {
         return new \ArrayIterator($this->attributes);
     }
